@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương Trình Huấn Luyện - Phật Quang Quyền</title>
+    
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='0' fill='%235d4037'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Segoe UI, sans-serif' font-weight='bold' font-size='220' fill='%23FFD700'%3EPQQ%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='0' fill='%235d4037'/%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Segoe UI, sans-serif' font-weight='bold' font-size='220' fill='%23FFD700'%3EPQQ%3C/text%3E%3C/svg%3E">
+
+    <meta name="theme-color" content="#5d4037">
+
+    <style>
+        :root {
+            --brown-color: #5d4037; /* Màu Đai Nâu */
+            --blue-color: #1565C0;  /* Màu Đai Lam */
+            --green-stripe: #43A047; /* Màu vạch xanh lục */
+            --header-bg: #f5f5f5;
+            --border-color: #ddd;
+            --text-color: #333;
+            --link-color: #d32f2f;
+            --green-belt: #2E7D32; /* Màu xanh lục đậm cho Lục Đai */
+            --red-stripe: #D32F2F;  /* Màu đỏ cho vạch */
+            --red-border: #D32F2F; /* Màu đỏ cho viền Hồng đai */
+             --yellow-stripe: #FFD700; /* Màu vàng cho vạch */
+             --yellow-border: #FBC02D; /* Màu vàng đậm cho viền Hoàng đai */
+    --white-stripe: #ffffff;  /* Màu trắng cho vạch */
+    --dark-blue-stripe: #01579B; /* Màu xanh dương đậm */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        h1.main-title {
+            text-align: center;
+            color: #b71c1c;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        /* KHỐI CẤP ĐAI */
+        .belt-section {
+            background: #fff;
+            margin-bottom: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        .level-info {
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        /* Class màu nền mới cho Bạch Đai */
+.bg-white-rank { 
+    background-color: #fff; 
+    color: #333; /* Chữ màu đen */
+    border: 1px solid #ccc; /* Viền nhẹ để nổi bật trên nền web */
+}
+.belt-bach-1-cap {
+    /* Tạo vạch xanh đậm ở phía bên phải đai */
+    background: linear-gradient(90deg, 
+        var(--brown-color) 0%, 
+        var(--brown-color) 85%, 
+        var(--dark-blue-stripe) 85%, 
+        var(--dark-blue-stripe) 92%, 
+        var(--brown-color) 92%
+    );
+    border-top: 4px solid #fff;           /* Viền trắng trên */
+    border-bottom: 4px solid #fff;        /* Viền trắng dưới */
+    border-left: 8px dotted #fff;         /* Mô phỏng tua trắng trái */
+    border-right: 8px dotted #fff;        /* Mô phỏng tua trắng phải */
+    box-sizing: border-box;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+/* Tạo hình Bạch Đai có tua: Nâu, viền trắng, mô phỏng tua ở 2 đầu */
+.belt-bach-tua {
+    background-color: var(--brown-color); /* Nền nâu */
+    border-top: 4px solid #fff;           /* Viền trắng trên */
+    border-bottom: 4px solid #fff;        /* Viền trắng dưới */
+    border-left: 8px dotted #fff;         /* Mô phỏng tua trắng bên trái */
+    border-right: 8px dotted #fff;        /* Mô phỏng tua trắng bên phải */
+    box-sizing: border-box;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+/* Tạo hình Chuẩn Bạch Đai: Nền nâu, viền trắng trên dưới */
+.belt-bach-1 {
+    background-color: var(--brown-color);
+    border-top: 4px solid #fff;
+    border-bottom: 4px solid #fff;
+    box-sizing: border-box; /* Đảm bảo viền không làm vỡ khung */
+    box-shadow: 0 0 2px rgba(0,0,0,0.3); /* Đổ bóng nhẹ để thấy rõ viền trắng */
+}
+        /* Class màu nền */
+        .bg-brown { background-color: var(--brown-color); }
+        .bg-blue { background-color: var(--blue-color); }
+        .bg-green { background-color: var(--green-belt); }
+
+        /* MÔ PHỎNG HÌNH ẢNH ĐAI */
+        .belt-visual {
+            width: 140px;
+            height: 40px;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .bg-yellow { 
+    background-color: var(--yellow-border); 
+    color: #333 !important; /* Chữ màu đen cho dễ đọc trên nền vàng */
+}
+/* Cập nhật lại màu chữ cho tiêu đề bên trong nếu cần */
+.bg-yellow .level-details h2, 
+.bg-yellow .level-details p {
+    color: #333; 
+    text-shadow: none;
+}
+
+/* Tạo hình Hoàng Đai 1 cấp: Nâu, viền vàng, 1 vạch trắng */
+.belt-hoang-1 {
+    background: linear-gradient(90deg, 
+        var(--yellow-border) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 60px, 
+        var(--white-stripe) 60px, 
+        var(--white-stripe) 70px, 
+        var(--brown-color) 70px, 
+        var(--brown-color) 130px, 
+        var(--yellow-border) 130px
+    );
+    border: 1px solid #ccc; /* Thêm viền nhẹ để vạch trắng nổi bật trên nền trắng web */
+}
+        .belt-brown { background-color: #5d4037; }
+        
+        .belt-lam-1 {
+            background: linear-gradient(90deg, #1565C0 10px, #5d4037 10px, #5d4037 60px, #43A047 60px, #43A047 70px, #5d4037 70px, #5d4037 130px, #1565C0 130px);
+        }
+        .belt-lam-2 {
+            background: linear-gradient(90deg, #1565C0 10px, #5d4037 10px, #5d4037 50px, #43A047 50px, #43A047 60px, #5d4037 60px, #5d4037 70px, #43A047 70px, #43A047 80px, #5d4037 80px, #5d4037 130px, #1565C0 130px);
+        }
+        .belt-lam-3 {
+            background: linear-gradient(90deg, #1565C0 10px, #5d4037 10px, #5d4037 40px, #43A047 40px, #43A047 50px, #5d4037 50px, #5d4037 60px, #43A047 60px, #43A047 70px, #5d4037 70px, #5d4037 80px, #43A047 80px, #43A047 90px, #5d4037 90px, #5d4037 130px, #1565C0 130px);
+        }
+        .belt-lam-4 {
+            background: linear-gradient(90deg, #1565C0 10px, #5d4037 10px, #5d4037 35px, #43A047 35px, #43A047 45px, #5d4037 45px, #5d4037 50px, #43A047 50px, #43A047 60px, #5d4037 60px, #5d4037 65px, #43A047 65px, #43A047 75px, #5d4037 75px, #5d4037 80px, #43A047 80px, #43A047 90px, #5d4037 90px, #5d4037 130px, #1565C0 130px);
+        }
+        .belt-luc-1 {
+            background: linear-gradient(90deg, var(--green-belt) 10px, var(--brown-color) 10px, var(--brown-color) 60px, var(--red-stripe) 60px, var(--red-stripe) 70px, var(--brown-color) 70px, var(--brown-color) 130px, var(--green-belt) 130px);
+        }
+        .belt-luc-2 {
+            background: linear-gradient(90deg, var(--green-belt) 10px, var(--brown-color) 10px, var(--brown-color) 50px, var(--red-stripe) 50px, var(--red-stripe) 60px, var(--brown-color) 60px, var(--brown-color) 70px, var(--red-stripe) 70px, var(--red-stripe) 80px, var(--brown-color) 80px, var(--brown-color) 130px, var(--green-belt) 130px);
+        }
+        .belt-hong-3 {
+    background: linear-gradient(90deg, 
+        var(--red-border) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 40px, 
+        var(--yellow-stripe) 40px, 
+        var(--yellow-stripe) 50px, 
+        var(--brown-color) 50px, 
+        var(--brown-color) 60px, 
+        var(--yellow-stripe) 60px, 
+        var(--yellow-stripe) 70px, 
+        var(--brown-color) 70px, 
+        var(--brown-color) 80px, 
+        var(--yellow-stripe) 80px, 
+        var(--yellow-stripe) 90px, 
+        var(--brown-color) 90px, 
+        var(--brown-color) 130px, 
+        var(--red-border) 130px
+    );
+}
+        .belt-luc-3 {
+            background: linear-gradient(90deg, 
+                var(--green-belt) 10px, 
+                var(--brown-color) 10px, 
+                var(--brown-color) 40px, 
+                var(--red-stripe) 40px, 
+                var(--red-stripe) 50px, 
+                var(--brown-color) 50px, 
+                var(--brown-color) 60px, 
+                var(--red-stripe) 60px, 
+                var(--red-stripe) 70px, 
+                var(--brown-color) 70px, 
+                var(--brown-color) 80px, 
+                var(--red-stripe) 80px, 
+                var(--red-stripe) 90px, 
+                var(--brown-color) 90px, 
+                var(--brown-color) 130px, 
+                var(--green-belt) 130px
+            );
+        }
+        .bg-red { background-color: var(--red-border); }
+
+/* Tạo hình Hồng Đai 1 cấp: Nâu, viền đỏ, 1 vạch vàng */
+.belt-hong-1 {
+    background: linear-gradient(90deg, 
+        var(--red-border) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 60px, 
+        var(--yellow-stripe) 60px, 
+        var(--yellow-stripe) 70px, 
+        var(--brown-color) 70px, 
+        var(--brown-color) 130px, 
+        var(--red-border) 130px
+    );
+}
+.belt-hoang-2 {
+    background: linear-gradient(90deg, 
+        var(--yellow-border) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 50px, 
+        var(--white-stripe) 50px, 
+        var(--white-stripe) 60px, 
+        var(--brown-color) 60px, 
+        var(--brown-color) 70px, 
+        var(--white-stripe) 70px, 
+        var(--white-stripe) 80px, 
+        var(--brown-color) 80px, 
+        var(--brown-color) 130px, 
+        var(--yellow-border) 130px
+    );
+    border: 1px solid #ccc;
+}
+.belt-hoang-4 {
+    background: linear-gradient(90deg, 
+        var(--yellow-border) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 35px, 
+        var(--white-stripe) 35px, 
+        var(--white-stripe) 45px, 
+        var(--brown-color) 45px, 
+        var(--brown-color) 50px, 
+        var(--white-stripe) 50px, 
+        var(--white-stripe) 60px, 
+        var(--brown-color) 60px, 
+        var(--brown-color) 65px, 
+        var(--white-stripe) 65px, 
+        var(--white-stripe) 75px, 
+        var(--brown-color) 75px, 
+        var(--brown-color) 80px, 
+        var(--white-stripe) 80px, 
+        var(--white-stripe) 90px, 
+        var(--brown-color) 90px, 
+        var(--brown-color) 130px, 
+        var(--yellow-border) 130px
+    );
+    border: 1px solid #ccc;
+}
+    .belt-hong-2 {
+    background: linear-gradient(90deg, 
+        var(--red-border) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 50px, 
+        var(--yellow-stripe) 50px, 
+        var(--yellow-stripe) 60px, 
+        var(--brown-color) 60px, 
+        var(--brown-color) 70px, 
+        var(--yellow-stripe) 70px, 
+        var(--yellow-stripe) 80px, 
+        var(--brown-color) 80px, 
+        var(--brown-color) 130px, 
+        var(--red-border) 130px
+    );
+}
+.belt-hoang-3 {
+    background: linear-gradient(90deg, 
+        var(--yellow-border) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 40px, 
+        var(--white-stripe) 40px, 
+        var(--white-stripe) 50px, 
+        var(--brown-color) 50px, 
+        var(--brown-color) 60px, 
+        var(--white-stripe) 60px, 
+        var(--white-stripe) 70px, 
+        var(--brown-color) 70px, 
+        var(--brown-color) 80px, 
+        var(--white-stripe) 80px, 
+        var(--white-stripe) 90px, 
+        var(--brown-color) 90px, 
+        var(--brown-color) 130px, 
+        var(--yellow-border) 130px
+    );
+    border: 1px solid #ccc;
+}
+.belt-hong-4 {
+    background: linear-gradient(90deg, 
+        var(--red-border) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 35px, 
+        var(--yellow-stripe) 35px, 
+        var(--yellow-stripe) 45px, 
+        var(--brown-color) 45px, 
+        var(--brown-color) 50px, 
+        var(--yellow-stripe) 50px, 
+        var(--yellow-stripe) 60px, 
+        var(--brown-color) 60px, 
+        var(--brown-color) 65px, 
+        var(--yellow-stripe) 65px, 
+        var(--yellow-stripe) 75px, 
+        var(--brown-color) 75px, 
+        var(--brown-color) 80px, 
+        var(--yellow-stripe) 80px, 
+        var(--yellow-stripe) 90px, 
+        var(--brown-color) 90px, 
+        var(--brown-color) 130px, 
+        var(--red-border) 130px
+    );
+}
+        .belt-luc-4 {
+    background: linear-gradient(90deg, 
+        var(--green-belt) 10px, 
+        var(--brown-color) 10px, 
+        var(--brown-color) 35px, 
+        var(--red-stripe) 35px, 
+        var(--red-stripe) 45px, 
+        var(--brown-color) 45px, 
+        var(--brown-color) 50px, 
+        var(--red-stripe) 50px, 
+        var(--red-stripe) 60px, 
+        var(--brown-color) 60px, 
+        var(--brown-color) 65px, 
+        var(--red-stripe) 65px, 
+        var(--red-stripe) 75px, 
+        var(--brown-color) 75px, 
+        var(--brown-color) 80px, 
+        var(--red-stripe) 80px, 
+        var(--red-stripe) 90px, 
+        var(--brown-color) 90px, 
+        var(--brown-color) 130px, 
+        var(--green-belt) 130px
+    );
+}
+        .level-details h2 { margin: 0 0 5px 0; text-transform: uppercase; font-size: 1.5rem; }
+        .level-details p { margin: 0; opacity: 0.9; }
+
+        /* GRID LAYOUT */
+        .curriculum-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 0; }
+        .column { border-right: 1px solid var(--border-color); }
+        .column:last-child { border-right: none; }
+        .col-header { background-color: var(--header-bg); padding: 12px; font-weight: bold; text-align: center; border-bottom: 2px solid var(--border-color); text-transform: uppercase; font-size: 0.9rem; color: #444; }
+        .col-content { padding: 20px; }
+
+        ul { list-style-type: none; padding-left: 0; margin: 0; }
+        li { margin-bottom: 12px; border-bottom: 1px dashed #eee; padding-bottom: 8px; }
+        li:last-child { border-bottom: none; }
+        li strong { display: block; margin-bottom: 4px; color: #222; }
+        .sub-list { padding-left: 15px; font-size: 0.95em; color: #555; line-height: 1.5; }
+
+        /* LINK YOUTUBE */
+        a.video-link {
+            text-decoration: none;
+            color: var(--link-color);
+            font-weight: 600;
+            font-size: 0.9em;
+            margin-left: 5px;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        a.video-link:hover {
+            color: #b71c1c;
+            text-decoration: underline;
+            background-color: #ffebee;
+            padding: 0 5px;
+            border-radius: 4px;
+        }
+        
+        a.video-link::before { content: "▶ "; font-size: 0.8em; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .curriculum-grid { grid-template-columns: 1fr 1fr; }
+            .column:nth-child(2) { border-right: none; }
+            .column { border-bottom: 1px solid var(--border-color); }
+        }
+
+        @media (max-width: 600px) {
+            .curriculum-grid { grid-template-columns: 1fr; }
+            .column { border-right: none; }
+            .level-info { flex-direction: column; text-align: center; gap: 15px; }
+            h1.main-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="main-title">Chương Trình Huấn Luyện<br>Phật Quang Quyền</h1>
+
+    <div class="belt-section">
+        <div class="level-info bg-brown">
+            <div class="level-details">
+                <h2>CẤP ĐAI: TỰ VỆ (SƠ ĐẲNG)</h2>
+                <p><strong>Đai nâu</strong> (cùng màu võ phục) - <strong>Thời gian:</strong> 4 Tháng</p>
+            </div>
+            <div class="belt-visual belt-brown" title="Đai Nâu"></div>
+        </div>
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Khởi động chung:</strong>
+                            <div class="sub-list">4 Lối bộ pháp chân trước/sau, 4 Lối đánh gối.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>2. <a href="#" class="video-link" target="_blank">6 Lối đánh Chỏ môn phái</a></strong></li>
+                        <li><strong>3. Bộ Sơn (1-8):</strong>
+                            <div class="sub-list">Thôi, Đào, Đăng, Bạt, Giáng, Hạ, Hoành, Tiền hậu.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>4. <a href="#" class="video-link" target="_blank">5 Lối Gạt bàn tay</a></strong></li>
+                        <li><strong>5. Bông Pháp & Thân Pháp:</strong>
+                            <div class="sub-list">Bông 1-6, Hạ điều, Té, Lộn lăn...</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>6. Bộ Cước (1-8) & Tấn (1-20)</strong> <a href="#" class="video-link" target="_blank">Xem</a></li>
+                        <li><strong>9. Phương pháp nạp xả khí</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế đối luyện 1-5:</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">1: Cơn Bão Đầu Mùa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">2: Tiếc Một Cành Hoa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">3: Tìm Chút Thân Quen</a></li>
+                                <li><a href="#" class="video-link" target="_blank">4: Đón Khách Đầu Đường</a></li>
+                                <li><a href="#" class="video-link" target="_blank">5: Hái Hoa Trên Cành</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ (1-3):</strong>
+                            <div class="sub-list">Phản bóp cổ, nắm áo, nắm tóc (trước 1).</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li><em>Quyền Môn Phái:</em> <a href="#" class="video-link" target="_blank">1. Quyền Tấn Pháp</a></li>
+                        <li><em>Quyền Liên Hoàn:</em> <a href="#" class="video-link" target="_blank">1. Căn Bản Công 27</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Nghi lễ môn phái</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lời thề môn sinh PQQ</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết đai Tự Vệ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="belt-section">
+        <div class="level-info bg-blue">
+            <div class="level-details">
+                <h2>CẤP 1: LAM ĐAI NHẤT CẤP</h2>
+                <p><strong>Danh xưng:</strong> Võ Sinh - <strong>Thời gian:</strong> 4 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền xanh lam, 1 vạch xanh lục</p>
+            </div>
+            <div class="belt-visual belt-lam-1" title="Lam Đai Nhất Cấp"></div>
+        </div>
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ & <a href="#" class="video-link" target="_blank">Các lối đánh gối bay</a></strong></li>
+                        <li><strong>3. Bộ Chưởng (1-7):</strong>
+                            <div class="sub-list">Thôi, Đào, Đăng, Bạt, Giáng, Hạ, Tiền hậu.</div>
+                            <a href="#" class="video-link" target="_blank">Xem</a>
+                        </li>
+                        <li><strong>4. Bộ Đao (1-7):</strong>
+                            <div class="sub-list">Khai, Đào, Đăng, Bạt, Giáng, Khóa, Hậu đao.</div>
+                            <a href="#" class="video-link" target="_blank">Xem</a>
+                        </li>
+                        <li><strong>5. Bộ Chỉ (1-10):</strong>
+                            <div class="sub-list">Trực, Đào, Đăng, Bạt, Phụng nhãn, Long đầu, Ưng trào, Hổ trào, Xà đầu, Hậu thủ.</div>
+                            <a href="#" class="video-link" target="_blank">Xem</a>
+                        </li>
+                        <li><strong>6. Bộ Trừu (Chỏ) (1-8):</strong>
+                            <div class="sub-list">Trực, Đào, Đăng, Bạt, Giáng, Hậu, Hoành, Khóa trừu.</div>
+                            <a href="#" class="video-link" target="_blank">Xem</a>
+                        </li>
+                        <li><strong>7. Bộ Cước (9-14):</strong>
+                            <div class="sub-list">Tảo, Ngọa, Trực tất, Đào tất, Bạt tất, Đăng tất cước.</div>
+                            <a href="#" class="video-link" target="_blank">Xem</a>
+                        </li>
+                        <li><strong>8. Thân Pháp:</strong> <span class="sub-list">Bật tôm, Té nổ.</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế đối luyện 6-10:</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">6: Chia Tay Mưa Rơi</a></li>
+                                <li><a href="#" class="video-link" target="_blank">7: Thuận Gió Bẻ Măng</a></li>
+                                <li><a href="#" class="video-link" target="_blank">8: Theo Chàng Về Dinh</a></li>
+                                <li><a href="#" class="video-link" target="_blank">9: Hái Lộc Đầu Xuân</a></li>
+                                <li><a href="#" class="video-link" target="_blank">10: Quét Lá Sân Chùa</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ (trước 2):</strong>
+                            <div class="sub-list">Phản bóp cổ, nắm áo, nắm tóc (2).</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li><em>Quyền Môn Phái:</em> <a href="#" class="video-link" target="_blank">1. Đường Lang Quyền</a></li>
+                        <li><em>Quyền Liên Hoàn:</em> <a href="#" class="video-link" target="_blank">1. Căn Bản Công 36</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Lam đai 1</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="belt-section">
+        <div class="level-info bg-blue">
+            <div class="level-details">
+                <h2>CẤP 2: LAM ĐAI NHỊ CẤP</h2>
+                <p><strong>Danh xưng:</strong> Võ Sinh - <strong>Thời gian:</strong> 4 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền xanh lam, 2 vạch xanh lục</p>
+            </div>
+            <div class="belt-visual belt-lam-2" title="Lam Đai Nhị Cấp"></div>
+        </div>
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Bộ Cước (15-24):</strong>
+                            <div class="sub-list">
+                                Câu, Hoành hậu, Tảo hậu, Song hậu, Phi tiêu, Phi Bàng, Phi đào, Phi hoành hậu, Song phi trực cước.
+                            </div>
+                            <div class="sub-list"><em>Phi tất cước (gối bay tới trước).</em></div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>3. Tập Chịu đòn</strong> <a href="#" class="video-link" target="_blank">Xem</a></li>
+                        <li><strong>4. Đấm và đá di động có mục tiêu</strong></li>
+                        <li><strong>5. Áp dụng đối luyện tập giao đấu</strong></li>
+                        <li><strong>6. Thân pháp:</strong>
+                            <div class="sub-list">Bật xoáy chân, lăng lưng, lăng bụng.</div>
+                            <a href="#" class="video-link" target="_blank">Xem</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện:</strong> <span class="sub-list">Ôn phần cũ (1-10)</span></li>
+                        <li><strong>II. Tự Vệ:</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">1: Phản bóp cổ trước 3</a></li>
+                                <li><a href="#" class="video-link" target="_blank">2: Phản nắm cổ áo trước 3</a></li>
+                                <li><a href="#" class="video-link" target="_blank">3: Phản nắm tóc trước 3</a></li>
+                                <li><a href="#" class="video-link" target="_blank">4: Phản nắm tóc sau 1</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li><em>Quyền Môn Phái:</em> <a href="#" class="video-link" target="_blank">1. Trấn Sơn Tất</a></li>
+                        <li><em>Quyền Liên Hoàn:</em> <a href="#" class="video-link" target="_blank">1. Căn Bản Công 45</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Lam đai 2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="belt-section">
+        <div class="level-info bg-blue">
+            <div class="level-details">
+                <h2>CẤP 3: LAM ĐAI TAM CẤP</h2>
+                <p><strong>Danh xưng:</strong> Võ Sinh - <strong>Thời gian:</strong> 4 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền xanh lam, 3 vạch xanh lục</p>
+            </div>
+            <div class="belt-visual belt-lam-3" title="Lam Đai Tam Cấp"></div>
+        </div>
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Bộ Pháp:</strong>
+                            <div class="sub-list">Song tiến, song lui, song lưng, song bụng.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>3. <a href="#" class="video-link" target="_blank">Các lối đánh gối nâng cao</a></strong></li>
+                        <li><strong>4. Quấn tay:</strong>
+                            <div class="sub-list">Bắt cặp quấn tay nhau cho mềm dẻo.</div>
+                        </li>
+                        <li><strong>5. Kỹ thuật di động:</strong>
+                            <div class="sub-list">Đấm, chém, gạt, đỡ di động.</div>
+                        </li>
+                        <li><strong>6. Thân pháp:</strong>
+                            <div class="sub-list">Lăn bánh xe, Sano trước.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (11-15):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">11: Bỏ Về Xứ Xa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">12: Đầy Trời Mưa Hoa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">13: Chèo Đò Trên Sông</a></li>
+                                <li><a href="#" class="video-link" target="_blank">14: Vác Củi Về Nhà</a></li>
+                                <li><a href="#" class="video-link" target="_blank">15: Giữ Khách Ở Lại</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li><em>Quyền Môn Phái:</em> <a href="#" class="video-link" target="_blank">1. Lục Hợp Quyền</a></li>
+                        <li><em>Quyền Liên Đoàn:</em> <a href="#" class="video-link" target="_blank">1. Lão Hổ Thượng Sơn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Lão Hổ Thượng Sơn</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Lam đai 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="belt-section">
+        <div class="level-info bg-blue">
+            <div class="level-details">
+                <h2>CẤP 4: LAM ĐAI TỨ CẤP</h2>
+                <p><strong>Danh xưng:</strong> Võ Sinh - <strong>Thời gian:</strong> 4 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền xanh lam, 4 vạch xanh lục</p>
+            </div>
+            <div class="belt-visual belt-lam-4" title="Lam Đai Tứ Cấp"></div>
+        </div>
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Các lối đánh của đầu</strong> <a href="#" class="video-link" target="_blank">Xem Video</a></li>
+                        <li><strong>3. Các lối đánh bằng vai</strong> <a href="#" class="video-link" target="_blank">Xem Video</a></li>
+                        <li><strong>4. Các lối đánh bằng mông</strong> <a href="#" class="video-link" target="_blank">Xem Video</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Nhị Thập Tứ Cước</a>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Bạch Hạc Sơn Quyền</a>
+                        </li>
+                        <li><strong>II. Ôn luyện:</strong> <span class="sub-list">Các bài quyền đã học.</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Bạch Hạc Sơn Quyền</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Lam đai 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="belt-section">
+        <div class="level-info bg-green">
+            <div class="level-details">
+                <h2>CẤP 5: LỤC ĐAI NHẤT CẤP</h2>
+                <p><strong>Danh xưng:</strong> Võ Sinh - <strong>Thời gian:</strong> 4 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền xanh lục, 1 vạch đỏ</p>
+            </div>
+            <div class="belt-visual belt-luc-1" title="Lục Đai Nhất Cấp"></div>
+        </div>
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Căn bản Đao:</strong>
+                            <div class="sub-list">
+                                Quấn đầu ôm gáy, múa hoa, cắt đỡ, bổ, chặt, chém, vớt, gạt, đâm.
+                            </div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>2. Ôn phần cũ</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (16-20):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">16: Quấn Quýt Dây Leo</a></li>
+                                <li><a href="#" class="video-link" target="_blank">17: Cắm Sào Chờ Gió</a></li>
+                                <li><a href="#" class="video-link" target="_blank">18: Bầy Gà Tìm Mẹ</a></li>
+                                <li><a href="#" class="video-link" target="_blank">19: Ấm Áp Tình Xuân</a></li>
+                                <li><a href="#" class="video-link" target="_blank">20: Hỏi Lại Cố Nhân</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Lãng Khách Du Xuân</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Nhập Môn Đao Pháp</a>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Ngọc Trản Quyền</a>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Song luyện 1</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Ngọc Trản Quyền</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Lục đai 1</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="belt-section">
+        <div class="level-info bg-green">
+            <div class="level-details">
+                <h2>CẤP 6: LỤC ĐAI NHỊ CẤP</h2>
+                <p><strong>Danh xưng:</strong> Võ Sinh - <strong>Thời gian:</strong> 4 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền xanh lục, 2 vạch đỏ</p>
+            </div>
+            <div class="belt-visual belt-luc-2" title="Lục Đai Nhị Cấp"></div>
+        </div>
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Côn căn bản:</strong>
+                            <div class="sub-list">Các kỹ thuật loan côn, đánh côn cơ bản.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>3. Niêm thủ đoán đòn</strong> <a href="#" class="video-link" target="_blank">Xem Video</a></li>
+                        <li><strong>4. Ứng dụng:</strong>
+                            <div class="sub-list">8 bộ pháp vào đối đối kháng.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (21-25):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">21: Trông Ngóng Người Đi</a></li>
+                                <li><a href="#" class="video-link" target="_blank">22: Đốn Củi Ngoài Sân</a></li>
+                                <li><a href="#" class="video-link" target="_blank">23: Mục Đồng Giỡn Trâu</a></li>
+                                <li><a href="#" class="video-link" target="_blank">24: Mở Cửa Đón Trăng</a></li>
+                                <li><a href="#" class="video-link" target="_blank">25: Mời Khách Sang Sông</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Mãn Thiên Hoa Vũ</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Nhập Môn Côn Pháp</a>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Hùng Kê Quyền</a>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Song Luyện Côn 1</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1 (Ôn tập)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Hùng Kê Quyền</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=8qd8uuZV4HQ" class="video-link" target="_blank">Lý thuyết Lục đai 2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="belt-section">
+        <div class="level-info bg-green">
+            <div class="level-details">
+                <h2>CẤP 7: LỤC ĐAI TAM CẤP</h2>
+                <p><strong>Danh xưng:</strong> Võ Sinh - <strong>Thời gian:</strong> 4 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền xanh lục, 3 vạch đỏ</p>
+            </div>
+            <div class="belt-visual belt-luc-3" title="Lục Đai Tam Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Kiếm căn bản:</strong>
+                            <div class="sub-list">Các kỹ thuật sử dụng kiếm cơ bản.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>3. Ứng dụng:</strong>
+                            <div class="sub-list">Các thế đối luyện vào chiến đấu.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (26-30):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">26: Nâng Một Cành Hoa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">27: Quỳ Lạy Đất Trời</a></li>
+                                <li><a href="#" class="video-link" target="_blank">28: Vào Vườn Ngắm Hoa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">29: Én Lượn Mùa Xuân</a></li>
+                                <li><a href="#" class="video-link" target="_blank">30: Đôi Chim Bay Lên</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Long Hổ Song Hình Quyền</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Tam Thập Lục Kiếm Pháp</a>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Lão Mai Quyền</a>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Song Luyện Kiếm 1</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Lão Mai Quyền</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Lục đai 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-green">
+            <div class="level-details">
+                <h2>CẤP 8: LỤC ĐAI TỨ CẤP</h2>
+                <p><strong>Danh xưng:</strong> Võ Sinh - <strong>Thời gian:</strong> 4 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền xanh lục, 4 vạch đỏ</p>
+            </div>
+            <div class="belt-visual belt-luc-4" title="Lục Đai Tứ Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Thân pháp</strong></li>
+                        <li><strong>2. Ôn phần cũ</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện:</strong>
+                            <div class="sub-list">Ôn phần cũ</div>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong>
+                            <div class="sub-list">Ôn phần cũ</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Phật Quang Chấn Môn Quyền</a>
+                        </li>
+                        <li>
+                            <em>Ôn luyện:</em><br>
+                            <div class="sub-list">Các bài quyền đã học, kiểm tra lại 1 trong các bài khi thi lên đai.</div>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Thanh Long Độc Kiếm</a>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Song luyện 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Thanh Long Độc Kiếm</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Lục đai 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-red">
+            <div class="level-details">
+                <h2>CẤP 9: HỒNG ĐAI NHẤT CẤP</h2>
+                <p><strong>Danh xưng:</strong> Phụ Tá Cấp 1 - <strong>Thời gian:</strong> 6 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền đỏ, 1 vạch vàng</p>
+            </div>
+            <div class="belt-visual belt-hong-1" title="Hồng Đai Nhất Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Song Chưởng:</strong>
+                            <div class="sub-list">
+                                Gạt tay mưa hoa, Gạt tay mai hoa, Tiếp khách, Cắm sào, Tiếp quà, Niêm thủ.
+                            </div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>3. Bắt cặp đoán niêm thủ</strong></li>
+                        <li><strong>4. Bộ pháp:</strong>
+                            <div class="sub-list">Hạc tiến bộ, Hạc thoái bộ, Mã thoái bộ.</div>
+                        </li>
+                        <li><strong>5. Tập chịu đòn (dụng cụ)</strong></li>
+                        <li><strong>6. Thân pháp:</strong> <span class="sub-list">Phi Xà, Phi Miêu.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (31-35):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">31: Lưu Luyến Cố Nhân</a></li>
+                                <li><a href="#" class="video-link" target="_blank">32: Quà Tặng Bất Ngờ</a></li>
+                                <li><a href="#" class="video-link" target="_blank">33: Hỏi Đường Rồi Đi</a></li>
+                                <li><a href="#" class="video-link" target="_blank">34: Tìm Được Cố Nhân</a></li>
+                                <li><a href="#" class="video-link" target="_blank">35: Đôi Rắn Tranh Mồi</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Bát Nhã Chưởng:</strong>
+                            <div class="sub-list">30 thế Võ Tát.</div>
+                        </li>
+                        <li><strong>III. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ (nếu có)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Phong Vân Quyền</a><br>
+                            <span class="sub-list">(Tự chọn phân 3 thế trong bài)</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Song Tuyết Kiếm</a><br>
+                            <span class="sub-list">(Tự chọn phân 3 thế)</span>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Bát Nhã Chưởng</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức cơ thể người & chấn thương</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Song Tuyết Kiếm</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Hồng đai 1</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-red">
+            <div class="level-details">
+                <h2>CẤP 10: HỒNG ĐAI NHỊ CẤP</h2>
+                <p><strong>Danh xưng:</strong> Phụ Tá Cấp 2 - <strong>Thời gian:</strong> 6 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền đỏ, 2 vạch vàng</p>
+            </div>
+            <div class="belt-visual belt-hong-2" title="Hồng Đai Nhị Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Luyện nhãn pháp</strong></li>
+                        <li><strong>3. Tấn pháp:</strong>
+                            <div class="sub-list">Du Long tấn, Thủ tấn.</div>
+                        </li>
+                        <li><strong>4. Khí công:</strong>
+                            <div class="sub-list">Thôi Sơn quyền công, Diệu Cước công, Phi Hành công.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                        <li><strong>5. Bộ tay (6 đường):</strong>
+                            <div class="sub-list">Chưởng, Trảo, Xà.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (36-40):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">36: Không Thể Rời Xa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">37: Đôi Thỏ Vờn Trăng</a></li>
+                                <li><a href="#" class="video-link" target="_blank">38: Đôi Cá Đùa Sóng</a></li>
+                                <li><a href="#" class="video-link" target="_blank">39: Chưa Đành Rời Xa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">40: Kề Vai Ngắm Trăng</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Long Tượng Côn</a><br>
+                            <span class="sub-list">(Tự chọn phân 3 thế)</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Phong Hoa Đao</a><br>
+                            <span class="sub-list">(Tự chọn phân 3 thế)</span>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Song luyện 3</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Cơ chế khí lực</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Phong Hoa Đao</a></li>
+                        <li><a href="https://drive.google.com/drive/folders/1rVxOXtY5lVF3o4BjuRajy9i7GzztQppt" class="video-link" target="_blank">Lý thuyết Hồng đai 2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-red">
+            <div class="level-details">
+                <h2>CẤP 11: HỒNG ĐAI TAM CẤP</h2>
+                <p><strong>Danh xưng:</strong> Phụ Tá Cấp 3 - <strong>Thời gian:</strong> 6 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền đỏ, 3 vạch vàng</p>
+            </div>
+            <div class="belt-visual belt-hong-3" title="Hồng Đai Tam Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><span class="sub-list">Ôn phần cũ</span></li>
+                        <li><strong>I. Thế Đối luyện (41-45):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">41: Lỡ Bước Sa Chân</a></li>
+                                <li><a href="#" class="video-link" target="_blank">42: Song Hỷ Mang Mang</a></li>
+                                <li><a href="#" class="video-link" target="_blank">43: Về Mái Nhà Xưa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">44: Cúi Chào Nắng Mai</a></li>
+                                <li><a href="#" class="video-link" target="_blank">45: Rất Nhiều Lễ Vật</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Vô Úy Đạo</a><br>
+                            <span class="sub-list">(Tự chọn phân 3 thế)</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Thái Sơn Côn</a><br>
+                            <span class="sub-list">(Tự chọn phân 3 thế)</span>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Mùa xuân đãi khách</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức đại cương về huyệt đạo</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Thái Sơn Côn</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Hồng đai 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-red">
+            <div class="level-details">
+                <h2>CẤP 12: HỒNG ĐAI TỨ CẤP</h2>
+                <p><strong>Danh xưng:</strong> Phụ Tá Cấp 4 - <strong>Thời gian:</strong> 6 Tháng</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền đỏ, 4 vạch vàng</p>
+            </div>
+            <div class="belt-visual belt-hong-4" title="Hồng Đai Tứ Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Thân pháp:</strong>
+                            <div class="sub-list">Luyện thân pháp với gậy dài.</div>
+                        </li>
+                        <li><strong>3. Cước pháp:</strong>
+                            <div class="sub-list">Diệp cước, Phi long độc cước, Giáng long cước.</div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><span class="sub-list">Ôn phần cũ</span></li>
+                        <li><strong>I. Thế Đối luyện (46-50):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">46: Xin Đợi Chờ Nhau</a></li>
+                                <li><a href="#" class="video-link" target="_blank">47: Tiếp Khách Ân Cần</a></li>
+                                <li><a href="#" class="video-link" target="_blank">48: Rắn Bay Qua Đồi</a></li>
+                                <li><a href="#" class="video-link" target="_blank">49: Gió Xoáy Bên Trời</a></li>
+                                <li><a href="#" class="video-link" target="_blank">50: Dẫn Bé Đi Về</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ (nếu có)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Liên Hoa Kiếm</a><br>
+                            <span class="sub-list">(Tự chọn phân 3 thế)</span><br>
+                            <span class="sub-list">Kiểm tra bất kỳ các bài quyền môn phái đã học.</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Siêu Xung Thiên</a><br>
+                            <span class="sub-list">(Tự chọn phân 3 thế)</span>
+                        </li>
+                        <li><strong>II. Song luyện:</strong>
+                            <div class="sub-list">Bốc thăm: Song luyện PQQ 3 hoặc Song luyện mùa xuân đãi khách.</div>
+                        </li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1 hoặc 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Một số bệnh thường gặp và cách phòng tránh</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Siêu Xung Thiên</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Hồng đai 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-yellow">
+            <div class="level-details">
+                <h2>CẤP 13: HOÀNG ĐAI NHẤT CẤP</h2>
+                <p><strong>Danh xưng:</strong> Chuẩn Huấn Luyện Viên (1 đẳng) - <strong>Thời gian:</strong> 2 Năm</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền vàng, 1 vạch trắng</p>
+                <p style="font-size: 0.85em; margin-top: 5px;">* Làm lễ nhập môn danh xưng chung là Môn sinh</p>
+            </div>
+            <div class="belt-visual belt-hoang-1" title="Hoàng Đai Nhất Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Thân pháp:</strong> <span class="sub-list">Thân pháp cao cấp, Thân pháp phi long.</span></li>
+                        <li><strong>3. Tập luyện:</strong>
+                            <div class="sub-list">Tập theo chế độ 10 gói của môn phái.</div>
+                        </li>
+                        <li><strong>4. Binh khí:</strong>
+                            <div class="sub-list">Đại đao căn bản.</div>
+                        </li>
+                        <li><strong>5. Kỹ thuật tay:</strong>
+                            <div class="sub-list">8 đòn song thủ, đánh một lúc hai tay.</div>
+                        </li>
+                        <li><strong>6. Bộ Pháp Mai Hoa Thung:</strong>
+                            <div class="sub-list" style="text-align: justify;">
+                                Đặt các viên gạch ống cách nhau năm tấc, theo hai chiều ngang và dọc, rải rác khắp sân tập. Vừa đi trên các viên gạch vừa đánh các đòn quyền, chưởng, chỏ, gối tự do.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện:</strong>
+                            <div class="sub-list">Ôn phần cũ.</div>
+                        </li>
+                        <li><strong>II. Hoạt thủ pháp:</strong>
+                            <div class="sub-list">30 Thế hoạt thủ pháp.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Tam Long Tuyệt Thần Đao</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Thanh Liên Kiếm</a><br>
+                            <span class="sub-list">(Chỉ định phân 3 thế trong bài)</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Độc Lư Thương</a><br>
+                            <span class="sub-list">(Chỉ định phân 3 thế trong bài)</span>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Song luyện 4</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1 hoặc 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Luật thi đấu VCTVN</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Kiến thức bài: Độc Lư Thương</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Hoàng đai 1</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Làm tiểu luận</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-yellow">
+            <div class="level-details">
+                <h2>CẤP 14: HOÀNG ĐAI NHỊ CẤP</h2>
+                <p><strong>Danh xưng:</strong> Huấn Luyện Viên Sơ Cấp (2 đẳng) - <strong>Thời gian:</strong> 2 Năm</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền vàng, 2 vạch trắng</p>
+            </div>
+            <div class="belt-visual belt-hoang-2" title="Hoàng Đai Nhị Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Tập luyện:</strong>
+                            <div class="sub-list">Tập theo chế độ 10 gói của môn phái.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (51-55):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">51: Mở Cửa Chào Khách</a></li>
+                                <li><a href="#" class="video-link" target="_blank">52: Cuồn Cuộn Sóng Xô</a></li>
+                                <li><a href="#" class="video-link" target="_blank">53: Duyên Dáng Mùa Xuân</a></li>
+                                <li><a href="#" class="video-link" target="_blank">54: Níu Giữ Thời Gian</a></li>
+                                <li><a href="#" class="video-link" target="_blank">55: Ăn Một Trả Hai</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ (nếu có)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Kim Long Thương</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Phong Vân Tán</a><br>
+                            <span class="sub-list">(Chỉ định phân 3 thế trong bài)</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Huỳnh Long Độc Kiếm</a><br>
+                            <span class="sub-list">(Chỉ định phân 3 thế trong bài)</span>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Song luyện kiếm II</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1 hoặc 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Hoàng đai 2</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-yellow">
+            <div class="level-details">
+                <h2>CẤP 15: HOÀNG ĐAI TAM CẤP</h2>
+                <p><strong>Danh xưng:</strong> Huấn Luyện Viên Trung Cấp (3 đẳng) - <strong>Thời gian:</strong> 2 Năm</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền vàng, 3 vạch trắng</p>
+            </div>
+            <div class="belt-visual belt-hoang-3" title="Hoàng Đai Tam Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Tập luyện:</strong>
+                            <div class="sub-list">Tập theo chế độ 10 gói của môn phái.</div>
+                        </li>
+                        <li><strong>3. 10 Đòn Gạt Đỡ:</strong>
+                            <div class="sub-list">
+                                1. Mở cửa, 2. Vén rèm, 3. Đóng cửa, 4. Đón khách, 5. Đốn củi, 6. Xoay qua, 7. Đỡ bằng chỏ, 8. Gạt bằng gối, 9. Gạt bằng cước, 10. Gạt bằng vai.
+                            </div>
+                            <a href="#" class="video-link" target="_blank">Xem Video</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (56-60):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">56: Kéo Thuyền Về Bến</a></li>
+                                <li><a href="#" class="video-link" target="_blank">57: Song Long Xuất Hải</a></li>
+                                <li><a href="#" class="video-link" target="_blank">58: Chi Một Cành Hoa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">59: Xin Chút Lòng Thương</a></li>
+                                <li><a href="#" class="video-link" target="_blank">60: Chặt Cành Bẻ Lá</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Du Long Phiến</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Kim Cang Song Giản</a><br>
+                            <span class="sub-list">(Chỉ định phân 3 thế trong mỗi bài)</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Bạch Hạc Thương</a><br>
+                        </li>
+                        <li><strong>II. Song luyện:</strong>
+                            <div class="sub-list">Bốc thăm bài SL 4 và SL kiếm.</div>
+                        </li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1 hoặc 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Hoàng đai 3</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-yellow">
+            <div class="level-details">
+                <h2>CẤP 16: HOÀNG ĐAI TỨ CẤP</h2>
+                <p><strong>Danh xưng:</strong> Huấn Luyện Viên Cao Cấp (4 đẳng) - <strong>Thời gian:</strong> 3 Năm</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền vàng, 4 vạch trắng</p>
+            </div>
+            <div class="belt-visual belt-hoang-4" title="Hoàng Đai Tứ Cấp"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn phần cũ</strong></li>
+                        <li><strong>2. Tập luyện:</strong>
+                            <div class="sub-list">Tập theo chế độ 10 gói của môn phái.</div>
+                        </li>
+                        <li><strong>3. Kỹ thuật đặc biệt:</strong>
+                            <div class="sub-list" style="text-align: justify;">
+                                Trụ một chân, chân còn lại đánh quyền, chưởng, chỏ và đá. Có khi nhảy một chân để đánh.
+                            </div>
+                        </li>
+                        <li><strong>4. Phản đòn nhanh:</strong>
+                            <div class="sub-list">
+                                Tập gạt và phản đòn bằng một tay thật nhanh (quyền, phất chưởng, đốn củi).
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Thế Đối luyện (61-65):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">61: Bốn Chưởng Liên Hoàn</a></li>
+                                <li><a href="#" class="video-link" target="_blank">62: Chim Nhảy Chuyền Cành</a></li>
+                                <li><a href="#" class="video-link" target="_blank">63: Tiên Nữ Hái Đào</a></li>
+                                <li><a href="#" class="video-link" target="_blank">64: Tiểu Đồng Đùa Cọp</a></li>
+                                <li><a href="#" class="video-link" target="_blank">65: Bóng Không Rời Hình</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Minh Nguyệt Song Dao</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Hàn Long Phục Hổ Quyền</a><br>
+                            <span class="sub-list">(Chỉ định phân 3 thế mỗi bài)</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Bát Quái Côn</a>
+                        </li>
+                        <li><strong>II. Song luyện:</strong> <a href="#" class="video-link" target="_blank">Song luyện côn</a></li>
+                        <li><strong>III. Thân pháp:</strong> <a href="#" class="video-link" target="_blank">Tổng hợp 1 hoặc 2</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Hoàng đai 3 (4)</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-white-rank">
+            <div class="level-details">
+                <h2>CẤP 17: CHUẨN BẠCH ĐAI</h2>
+                <p><strong>Danh xưng:</strong> Chuẩn Võ Sư (5 đẳng) - <strong>Thời gian:</strong> 4 Năm</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền trắng</p>
+            </div>
+            <div class="belt-visual belt-bach-1" title="Chuẩn Bạch Đai"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn Phần Cũ</strong></li>
+                        <li><strong>2. Phá chân:</strong>
+                            <div class="sub-list">10 cách phá chân.</div>
+                        </li>
+                        <li><strong>3. Công phá:</strong>
+                            <div class="sub-list">Đánh bao cát Khí công, Chém bao cát.</div>
+                        </li>
+                        <li><strong>4. Bộ pháp:</strong>
+                            <div class="sub-list">Bích du công (chạy trên tường).</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><span class="sub-list">Ôn phần cũ</span></li>
+                        <li><strong>I. Thế đối luyện (66-70):</strong>
+                            <ul class="sub-list">
+                                <li><a href="#" class="video-link" target="_blank">66: Gánh Nước Tưới Hoa</a></li>
+                                <li><a href="#" class="video-link" target="_blank">67: Theo Đường Mà Đi</a></li>
+                                <li><a href="#" class="video-link" target="_blank">68: Theo Đường Mà Chạy</a></li>
+                                <li><a href="#" class="video-link" target="_blank">69: Đón Lấy Cuồng Phong</a></li>
+                                <li><a href="#" class="video-link" target="_blank">70: Hoa Mai Song Chưởng</a></li>
+                            </ul>
+                        </li>
+                        <li><strong>II. Tự Vệ:</strong> <span class="sub-list">Ôn phần cũ</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Tiên Long Song Kiếm</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Tam Long Hý Nguyệt</a><br>
+                            <span class="sub-list">(Chỉ định phân 5 thế trong mỗi bài)</span>
+                        </li>
+                        <li>
+                            <em>Quyền Liên Đoàn:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Lôi Long Đao</a>
+                        </li>
+                        <li><strong>III. Khí Công:</strong>
+                            <a href="#" class="video-link" target="_blank">Thái Hư Khí Công</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Chuẩn Bạch đai</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Làm tiểu luận</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="belt-section">
+        <div class="level-info bg-white-rank">
+            <div class="level-details">
+                <h2>CẤP 18: BẠCH ĐAI</h2>
+                <p><strong>Danh xưng:</strong> Võ Sư (6 đẳng) - <strong>Thời gian:</strong> 5 Năm</p>
+                <p style="font-size: 0.9em; font-style: italic;">Đai nâu, viền trắng, có tua trắng</p>
+            </div>
+            <div class="belt-visual belt-bach-tua" title="Bạch Đai (Có tua)"></div>
+        </div>
+
+        <div class="curriculum-grid">
+            <div class="column">
+                <div class="col-header">Kỹ Thuật Căn Bản</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>1. Ôn Phần Cũ</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đối Luyện & Tự Vệ</div>
+                <div class="col-content">
+                    <ul>
+                        <li><span class="sub-list">Ôn phần cũ</span></li>
+                        <li><strong>Nghiên cứu</strong></li>
+                        <li><strong>Có chương trình riêng</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Đơn Luyện & Song Luyện</div>
+                <div class="col-content">
+                    <ul>
+                        <li><strong>I. Đơn luyện:</strong></li>
+                        <li>
+                            <em>Quyền Môn Phái:</em><br>
+                            <a href="#" class="video-link" target="_blank">1. Vô Tướng Trượng Pháp</a><br>
+                            <a href="#" class="video-link" target="_blank">2. Nhuyễn Cân Pháp</a><br>
+                            <span class="sub-list">(Chỉ định phân 5 thế trong mỗi bài)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="col-header">Lý Thuyết</div>
+                <div class="col-content">
+                    <ul>
+                        <li><a href="#" class="video-link" target="_blank">Lý thuyết Bạch đai</a></li>
+                        <li><a href="#" class="video-link" target="_blank">Làm tiểu luận</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
